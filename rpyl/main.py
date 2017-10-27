@@ -6,32 +6,19 @@ file.close()
 
 stack = []
 
-for s in code:
-	if(s == "+"):
-		stack.insert(0, stack[0] + stack[1])
-		for i in range(0,2):
-			del stack[1]
-	elif(s == "-"):
-		stack.insert(0,stack[1] - stack[0])
-		for i in range(0, 2):
-			del stack[1]
-        elif(s == "*"):
-                stack.insert(0, stack[0] * stack[1])
-                for i in range(0,2):
-                        del stack[1]
-        elif(s == "/"):
-                stack.insert(0, stack[1] / stack[0])
-                for i in range(0,2):
-                        del stack[1]
-        elif(s == "**"):
-                stack.insert(0, stack[0] ** stack[1])
-                for i in range(0,2):
-                        del stack[1]
-        elif(s == "sqrt"):
-                stack.insert(0, math.sqrt(stack[0]))
-                del stack[1]
-
-	elif(s == "print"):
-		print(stack)
+def isfloat(x):
+	try:
+		a = float(x)
+	except ValueError:
+		return False
 	else:
+		return True
+
+
+for s in code:
+	if(isfloat(s)):
 		stack.insert(0, float(s))
+	else:
+		f = open("functions/"+s)
+		exec(f.read())
+		f.close
