@@ -19,6 +19,12 @@ for s in code:
 	if(isfloat(s)):
 		stack.insert(0, float(s))
 	else:
-		f = open("functions/"+s)
+		if(s == '/'):
+			s = 'div'
+		if(s == '*'):
+			s = 'mult'
+		if(s == '-'):
+			s = 'sub'
+		f = open('functions/'+s+'.f')
 		exec(f.read())
 		f.close
